@@ -59,6 +59,13 @@
                                             <td>{{ $p->price }}</td>
                                             <td>
                                                 <a href="{{ route('product.edit', $p->id) }}" class="btn btn-primary">Edit</a>
+                                                <form action="{{ route('product.destroy', $p->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger btn-rounded btn-icon" title="DELETE">
+                                                        Hapus
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
