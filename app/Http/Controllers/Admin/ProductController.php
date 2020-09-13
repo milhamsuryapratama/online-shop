@@ -136,6 +136,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if ($product->delete()) {
+            File::delete('assets/photo/' . $product->picture);
+            return redirect()->route('product.index');
+        }
     }
 }
