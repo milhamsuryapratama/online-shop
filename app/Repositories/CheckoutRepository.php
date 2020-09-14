@@ -32,7 +32,7 @@ class CheckoutRepository
                         'sub_total' => $c->qty * $c->product->price
                     ]);
                 }
-
+                CartRespository::deleteCart();
                 DB::commit();
                 return $transaction;
             }
