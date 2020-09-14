@@ -19,4 +19,13 @@ class TransactionController extends Controller
         $data['detail'] = Transaction::with(['details', 'details.product'])->findOrFail($id);
         return view('admin/transaction/detail', $data);
     }
+
+    public function delivered($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->status = 'delivered';
+        if ($transaction->save()) {
+            return redirect()->back()->with('success', 'Order has been delivered');
+        }
+    }
 }
