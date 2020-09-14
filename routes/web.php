@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/admin', 'Admin\LoginController@index');
 Route::get('/home', 'HomeController@index');
+Route::get('/admin', 'Admin\LoginController@index')->middleware('auth:web,admin');
 Route::post('admin/login', 'Admin\LoginController@login');
 Route::get('admin/logout', 'Admin\LoginController@logout');
 Route::get('admin/dashboard', 'Admin\DashboardController@index');
