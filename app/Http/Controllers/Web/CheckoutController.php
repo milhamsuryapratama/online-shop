@@ -31,6 +31,6 @@ class CheckoutController extends Controller
 
         $transaction = CheckoutRepository::store($checkoutRequest, $total, $cart);
         Mail::to('nsyclda@gmail.com')->send(new OrderEmail($transaction, $cart));
-        return $transaction;
+        return redirect()->to('orders')->with('success', 'Congratulations, your order with the code PROVO-'.$transaction->id.' has been successfully placed');
     }
 }
