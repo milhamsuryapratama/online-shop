@@ -13,4 +13,9 @@ class Transaction_Details extends Model
         'qty',
         'sub_total'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
