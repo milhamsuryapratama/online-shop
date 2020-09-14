@@ -24,6 +24,12 @@ Route::group(['namespace' => 'Admin'], function () {
 
         Route::resource('category', 'CategoryController');
         Route::resource('product', 'ProductController');
+
+        Route::group(['prefix' => 'transaction'], function () {
+           Route::get('/', 'TransactionController@index');
+           Route::get('/data/{id}', 'TransactionController@detail');
+           Route::post('/delivered/{id}', 'TransactionController@delivered');
+        });
     });
 });
 
@@ -33,19 +39,19 @@ Route::group(['namespace' => 'Web'], function () {
        Route::get('/{slug}', 'ProductController@detail');
    });
 
-   Route::group(['prefix' => 'cart'], function () {
+   Route::group(['prefix' => 'cart', 'middleware' => 'auth'], function () {
       Route::get('/', 'CartController@index');
       Route::post('/', 'CartController@store');
       Route::get('/delete/{id}', 'CartController@delete');
       Route::post('/change_qty', 'CartController@change_qty');
    });
 
-   Route::group(['prefix' => 'checkout'], function () {
+   Route::group(['prefix' => 'checkout', 'middleware' => 'auth'], function () {
       Route::get('/', 'CheckoutController@index');
       Route::post('/', 'CheckoutController@store');
    });
 
-    Route::group(['prefix' => 'orders'], function () {
+    Route::group(['prefix' => 'orders', 'middleware' => 'auth'], function () {
         Route::get('/', 'OrderController@index');
         Route::get('/pay', 'OrderController@pay');
         Route::post('/paid', 'OrderController@paid');

@@ -28,4 +28,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    function getAddress()
+    {
+        return $this->attributes['address'].', '.$this->attributes['city'].', '.$this->attributes['province'].', '.$this->attributes['postcode'];
+    }
 }

@@ -25,45 +25,51 @@
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="/" class="brand-link">
-            <img src="#" alt="LOGO" class="brand-image elevation-3">
+{{--            <img src="#" alt="LOGO" class="brand-image elevation-3">--}}
             <span class="brand-text font-weight-bolder">ONLINE SHOP</span>
         </a>
         <div class="sidebar">
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item has-treeview">
-                        <a href="/inventaris/" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Data Master<i class="right fas fa-angle-left"></i></p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('category.index') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Category</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://sarpra.herokuapp.com/" class="nav-link active">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Product</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+{{--                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">--}}
+{{--                    <li class="nav-item has-treeview">--}}
+{{--                        <a href="/inventaris/" class="nav-link">--}}
+{{--                            <i class="nav-icon fas fa-tachometer-alt"></i>--}}
+{{--                            <p>Data Master<i class="right fas fa-angle-left"></i></p>--}}
+{{--                        </a>--}}
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{ route('category.index') }}" class="nav-link">--}}
+{{--                                    <i class="far fa-circle nav-icon"></i>--}}
+{{--                                    <p>Category</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="https://sarpra.herokuapp.com/" class="nav-link active">--}}
+{{--                                    <i class="far fa-circle nav-icon"></i>--}}
+{{--                                    <p>Product</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-header">Master Data</li>
                     <li class="nav-item">
                         <a href="{{ route('category.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-shopping-cart"></i>
-                            <p>Category</p>
+                            <p>Categories</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('product.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-building"></i>
-                            <p>Product</p>
+                            <p>Products</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ URL::to('admin/transaction') }}" class="nav-link">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>Transactions</p>
                         </a>
                     </li>
                     <li class="nav-item">

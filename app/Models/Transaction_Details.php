@@ -11,11 +11,12 @@ class Transaction_Details extends Model
         'transaction_id',
         'product_id',
         'qty',
-        'sub_total'
+        'sub_total',
+        'price'
     ];
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 }

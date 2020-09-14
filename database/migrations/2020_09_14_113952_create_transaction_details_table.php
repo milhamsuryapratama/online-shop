@@ -19,6 +19,7 @@ class CreateTransactionDetailsTable extends Migration
             $table->foreign('transaction_id')->references('id')->on('transactions');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
+            $table->integer('price');
             $table->integer('qty');
             $table->integer('sub_total');
             $table->timestamps();
