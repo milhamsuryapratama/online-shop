@@ -155,3 +155,56 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function () {
+            $(".plus").click(function () {
+                let row = $(this).closest('tr');
+                let id = $(this).data('id');
+
+                changeQty(id, 'plus', row);
+            });
+
+            $(".minus").click(function () {
+                let row = $(this).closest('tr');
+                let id = $(this).data('id');
+
+                changeQty(id, 'minus', row);
+            });
+
+            $(".qty").keyup(function () {
+                let row = $(this).closest('tr');
+                let id = $(this).data('id');
+
+                changeQty(id, null, row, $(this).val());
+            })
+        });
+
+        function changeQty(product_id, action, row, val = null) {
+            if (val != '') {
+                $.ajax({
+                    url: '{{ URL::to('cart/change_qty') }}',
+                    type: 'POST',
+                    data: {
+                        'product_id': product_id,
+                        'action': action,
+                        'val': val
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response, statusText, xhr) {
+                        if (xhr.status == 200) {
+                            row.find('.qty').val(response.data.qty);
+                            row.find('.subtotal').html(response.data.subtotal)
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                })
+            }
+        }
+    </script>
+@endpush
