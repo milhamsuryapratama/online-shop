@@ -27,3 +27,5 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::resource('product', 'ProductController');
     });
 });Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
+Route::get('/', 'Web\ProductController@index');
