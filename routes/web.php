@@ -36,6 +36,11 @@ Route::group(['namespace' => 'Web'], function () {
       Route::get('/delete/{id}', 'CartController@delete');
       Route::post('/change_qty', 'CartController@change_qty');
    });
+
+   Route::group(['prefix' => 'checkout'], function () {
+      Route::get('/', 'CheckoutController@index');
+      Route::post('/', 'CheckoutController@store');
+   });
 });
 
 Auth::routes(['verify' => true]);
