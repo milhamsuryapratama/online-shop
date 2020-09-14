@@ -12,13 +12,16 @@
 */
 
 Route::get('/home', 'HomeController@index');
-Route::get('/admin', 'Admin\LoginController@index')->middleware('auth:web,admin');
-Route::post('admin/login', 'Admin\LoginController@login');
+//Route::get('/admin', 'Admin\LoginController@index')->middleware('auth:web,admin');
+//Route::post('admin/login', 'Admin\LoginController@login');
 Route::get('admin/logout', 'Admin\LoginController@logout');
 Route::get('admin/dashboard', 'Admin\DashboardController@index');
 
 Route::group(['namespace' => 'Admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
+        Route::get('/', 'LoginController@index');
+        Route::post('/login', 'LoginController@login');
+
         Route::resource('category', 'CategoryController');
         Route::resource('product', 'ProductController');
     });
