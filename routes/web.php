@@ -22,6 +22,14 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::resource('category', 'CategoryController');
         Route::resource('product', 'ProductController');
     });
-});Auth::routes(['verify' => true]);
+});
+
+Route::group(['namespace' => 'Web'], function () {
+   Route::group(['prefix' => 'product'], function () {
+       Route::get('/', 'ProductController@index');
+       Route::get('/{slug}', 'ProductController@detail');
+   });
+});
+
 Auth::routes(['verify' => true]);
 Route::get('/', 'Web\ProductController@index');
