@@ -30,6 +30,6 @@ class OrderController extends Controller
         $paidRequest->validated();
 
         OrderRepository::saveFile($paidRequest);
-        return redirect()->to('orders');
+        return redirect()->to('orders')->with('success', 'Congratulations, your payment has been received');
     }
 }
