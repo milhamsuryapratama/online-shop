@@ -23,6 +23,10 @@ class TransactionController extends Controller
     public function delivered($id)
     {
         $transaction = Transaction::findOrFail($id);
+        if ($transaction->payment_process != 'Y') {
+            return redirect()->back()->with('error', 'Cannot delivered, this order has not been paid yet');
+        }
+
         $transaction->status = 'delivered';
         if ($transaction->save()) {
             return redirect()->back()->with('success', 'Order has been delivered');
