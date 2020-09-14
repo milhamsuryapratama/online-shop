@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
@@ -14,6 +15,17 @@ class Transaction extends Model
         'postcode',
         'address',
         'status',
-        'payment_process'
+        'payment_process',
+        'file'
     ];
+
+    public function details()
+    {
+        return $this->hasMany(Transaction_Details::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
