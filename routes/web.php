@@ -34,6 +34,7 @@ Route::group(['namespace' => 'Web'], function () {
       Route::get('/', 'CartController@index');
       Route::post('/', 'CartController@store');
       Route::get('/delete/{id}', 'CartController@delete');
+      Route::post('/change_qty', 'CartController@change_qty');
    });
 });
 
