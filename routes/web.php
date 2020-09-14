@@ -45,6 +45,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/', 'OrderController@index');
         Route::get('/pay', 'OrderController@pay');
+        Route::post('/paid', 'OrderController@paid');
     });
 });
 
