@@ -12,8 +12,6 @@
 */
 
 Route::get('/home', 'HomeController@index');
-//Route::get('/admin', 'Admin\LoginController@index')->middleware('auth:web,admin');
-//Route::post('admin/login', 'Admin\LoginController@login');
 Route::get('admin/logout', 'Admin\LoginController@logout');
 Route::get('admin/dashboard', 'Admin\DashboardController@index');
 
@@ -46,9 +44,9 @@ Route::group(['namespace' => 'Web'], function () {
       Route::post('/change_qty', 'CartController@change_qty');
    });
 
-   Route::group(['prefix' => 'checkout', 'middleware' => 'auth'], function () {
-      Route::get('/', 'CheckoutController@index');
-      Route::post('/', 'CheckoutController@store');
+   Route::group(['prefix' => 'checkout', 'middleware' => ['auth', 'disableRedirectUrl']], function () {
+      Route::post('/', 'CheckoutController@index')->name('checkout');
+      Route::post('/store', 'CheckoutController@store');
    });
 
     Route::group(['prefix' => 'orders', 'middleware' => 'auth'], function () {
