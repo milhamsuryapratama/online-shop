@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Repositories\CartRespository;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +14,16 @@ class CartController extends Controller
 {
     public function index()
     {
-        $data['cart'] = Cart::with('product')->whereUserId(Auth::id())->get();
+        $data['cart'] = Cart::whereUserId(Auth::id())->get();
+//        $cart = Cart::join('products', 'products.id', '=', 'carts.product_id')
+//            ->where('carts.user_id', Auth::id())
+//            ->get([
+//                'carts.*',
+//                'products.*',
+//                DB::raw('SUM(carts.qty * products.price) as total')
+//            ]);
+        $data['total'] = CartRespository::getTotal();
         return view('web/cart', $data);
-//        return $data['cart']->sum('product.price');
     }
 
     public function store(Request $request)
