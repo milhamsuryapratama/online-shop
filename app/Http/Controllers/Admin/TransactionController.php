@@ -13,4 +13,10 @@ class TransactionController extends Controller
         $data['transaction'] = Transaction::all();
         return view('admin/transaction/index', $data);
     }
+
+    public function detail($id)
+    {
+        $data['detail'] = Transaction::with(['details', 'details.product'])->findOrFail($id);
+        return view('admin/transaction/detail', $data);
+    }
 }
