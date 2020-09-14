@@ -32,4 +32,8 @@ class CartRespository
             ->where('carts.user_id', Auth::id())
             ->get(DB::raw('SUM(carts.qty * products.price) as total'));
     }
+
+    public static function deleteCart() {
+        return Cart::whereUserId(Auth::id())->delete();
+    }
 }
