@@ -84,7 +84,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="{{ URL::to('cart') }}">Cart - <span class="cart-amunt">{{ $cartHead[0]->total }}</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">{{ $cartHead[0]->count }}</span></a>
+                    <a href="{{ URL::to('cart') }}">Cart - <span class="cart-amunt">{{ !is_null($cartHead) ? $cartHead[0]->total : 0 }}</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">{{ !is_null($cartHead) ? $cartHead[0]->count : 0 }}</span></a>
                 </div>
             </div>
         </div>
