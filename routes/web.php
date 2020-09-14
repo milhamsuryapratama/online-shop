@@ -24,6 +24,12 @@ Route::group(['namespace' => 'Admin'], function () {
 
         Route::resource('category', 'CategoryController');
         Route::resource('product', 'ProductController');
+
+        Route::group(['prefix' => 'transaction'], function () {
+           Route::get('/', 'TransactionController@index');
+           Route::get('/data/{id}', 'TransactionController@detail');
+           Route::post('/delivered/{id}', 'TransactionController@delivered');
+        });
     });
 });
 
