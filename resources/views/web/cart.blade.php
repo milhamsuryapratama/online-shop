@@ -110,14 +110,14 @@
 
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <input type="button" class="minus" value="-">
-                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="{{ $c->qty }}" min="0" step="1">
-                                                    <input type="button" class="plus" value="+">
+                                                    <input type="button" class="minus" data-id="{{ $c->product->id }}" value="-">
+                                                    <input type="text" size="2" data-id="{{ $c->product->id }}" class="input-text qty" title="Qty" value="{{ $c->qty }}" min="0" step="1">
+                                                    <input type="button" class="plus" data-id="{{ $c->product->id }}" value="+">
                                                 </div>
                                             </td>
 
                                             <td class="product-subtotal">
-                                                <span class="amount">
+                                                <span class="subtotal">
                                                     {{ $c->qty * $c->product->price }}
                                                 </span>
                                             </td>
