@@ -24,6 +24,7 @@ class CreateTransactionTable extends Migration
             $table->text('address');
             $table->enum('status', ['process', 'delivered'])->default('process');
             $table->enum('payment_precess', ['Y', 'N'])->default('N');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
