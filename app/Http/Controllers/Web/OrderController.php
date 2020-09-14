@@ -24,4 +24,12 @@ class OrderController extends Controller
         $data['payment'] = Transaction::findOrFail($id);
         return view('web/pay', $data);
     }
+
+    public function paid(PaidRequest $paidRequest)
+    {
+        $paidRequest->validated();
+
+        OrderRepository::saveFile($paidRequest);
+        return redirect()->to('orders');
+    }
 }
