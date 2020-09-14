@@ -26,7 +26,7 @@ class CartController extends Controller
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
 
-        return redirect()->back();
+        return redirect()->to('cart');
     }
 
     public function delete($id)
@@ -36,4 +36,16 @@ class CartController extends Controller
             return redirect()->back();
         }
     }
+
+    public function change_qty(Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                return CartService::changeQty($request->all());
+            }
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+
 }
