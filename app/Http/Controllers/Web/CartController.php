@@ -17,4 +17,15 @@ class CartController extends Controller
         return view('web/cart', $data);
 //        return $data['cart']->sum('product.price');
     }
+
+    public function store(Request $request)
+    {
+        try {
+            CartService::cekStock($request->all());
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+
+        return redirect()->back();
+    }
 }

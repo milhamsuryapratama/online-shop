@@ -32,6 +32,7 @@ Route::group(['namespace' => 'Web'], function () {
 
    Route::group(['prefix' => 'cart'], function () {
       Route::get('/', 'CartController@index');
+      Route::post('/', 'CartController@store');
    });
 });
 
