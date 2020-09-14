@@ -29,6 +29,7 @@ class CheckoutRepository
                         'transaction_id' => $transaction->id,
                         'product_id' => $c->product_id,
                         'qty' => $c->qty,
+                        'price' => $c->product->price,
                         'sub_total' => $c->qty * $c->product->price
                     ]);
                 }
