@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/admin', 'Admin\LoginController@index');
 Route::get('/home', 'HomeController@index');
+Route::get('/admin', 'Admin\LoginController@index')->middleware('auth:web,admin');
 Route::post('admin/login', 'Admin\LoginController@login');
 Route::get('admin/logout', 'Admin\LoginController@logout');
 Route::get('admin/dashboard', 'Admin\DashboardController@index');
@@ -28,6 +28,13 @@ Route::group(['namespace' => 'Web'], function () {
    Route::group(['prefix' => 'product'], function () {
        Route::get('/', 'ProductController@index');
        Route::get('/{slug}', 'ProductController@detail');
+   });
+
+   Route::group(['prefix' => 'cart'], function () {
+      Route::get('/', 'CartController@index');
+      Route::post('/', 'CartController@store');
+      Route::get('/delete/{id}', 'CartController@delete');
+      Route::post('/change_qty', 'CartController@change_qty');
    });
 });
 
