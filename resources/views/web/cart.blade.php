@@ -141,7 +141,7 @@
                                         <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">{{ $cart->sum(DB::raw('qty*product.price')) }}</span></td>
+                                            <td><span class="total">{{ $total[0]->total }}</span></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -197,6 +197,7 @@
                     success: function (response, statusText, xhr) {
                         if (xhr.status == 200) {
                             row.find('.qty').val(response.data.qty);
+                            $(".total").html(response.data.total[0].total);
                             row.find('.subtotal').html(response.data.subtotal)
                         }
                     },
