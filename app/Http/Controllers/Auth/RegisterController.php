@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\RegisterConfirmation;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\URL;
+use Notification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,10 +67,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $details = [
+
+            'greeting' => 'Hi '.$data['name'],
+
+            'body' => 'Thank you for registered',
+
+            'thanks' => 'Thank you',
+
+            'actionText' => 'Confirm Now',
+
+            'actionUrl' => route('verification.verify', [$user->id, Hash::make($user->id)]),
+
+            'id' => $user->id
+
+        ];
+
+        Notification::send($user, new RegisterConfirmation($details));
+
+        return $user;
     }
 }
