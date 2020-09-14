@@ -25,7 +25,7 @@ class CartService
         }
 
         $product = Product::find($data['product_id']);
-        if (($data['qty'] + $cart->qty) > $product->stock) {
+        if (($data['qty'] + $cart->qty) > $product->stock OR $product->stock < 2) {
             throw new Exception('Failed to add cart !');
         }
 
@@ -41,7 +41,7 @@ class CartService
             if (($cart->qty + 1) > $cart->product->stock) {
                 return response()->json([
                     'success' => 0,
-                    'message' => 'Failed to add cart !'
+                    'message' => 'Out of stock !'
                 ], 400);
             }
 
@@ -51,7 +51,7 @@ class CartService
             if (($cart->qty - 1) < 1) {
                 return response()->json([
                     'success' => 0,
-                    'message' => 'Failed to add cart !'
+                    'message' => 'Out of stock !'
                 ], 400);
             }
 
@@ -61,7 +61,7 @@ class CartService
             if ($data['val'] > $cart->product->stock) {
                 return response()->json([
                     'success' => 0,
-                    'message' => 'Failed to add cart !'
+                    'message' => 'Out of stock !'
                 ], 400);
             }
 
