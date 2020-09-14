@@ -73,7 +73,7 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
-                            <form method="post" action="#">
+                            <form method="GET" action="{{ URL::to('checkout') }}">
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                     <tr>
