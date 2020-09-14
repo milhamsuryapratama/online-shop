@@ -13,4 +13,10 @@ class ProductController extends Controller
         $data['product'] = Product::all();
         return view('web/home', $data);
     }
+
+    public function detail($slug)
+    {
+        $data['product'] = Product::whereSlug($slug)->first();
+        return view('web/product_detail', $data);
+    }
 }
