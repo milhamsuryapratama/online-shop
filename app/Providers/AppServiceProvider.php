@@ -44,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
 
                 //...with this variable
                 $view->with('cartHead', $cart);
+            } else {
+                $view->with('cartHead', null);
             }
         });
     }
