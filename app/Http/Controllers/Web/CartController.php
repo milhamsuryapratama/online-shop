@@ -18,6 +18,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'Cart - Online Shop';
         $data['cart'] = Cart::whereUserId(Auth::id())->get();
 //        $cart = Cart::join('products', 'products.id', '=', 'carts.product_id')
 //            ->where('carts.user_id', Auth::id())

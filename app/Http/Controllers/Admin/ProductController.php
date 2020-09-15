@@ -21,6 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'Product';
         $data['product'] = Product::all();
         return view('admin/product/index', $data);
     }
@@ -32,6 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $data['title'] = 'Product';
         $data['category'] = Category::all();
         return view('admin/product/create', $data);
     }
@@ -70,6 +72,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $data['title'] = 'Product';
         $data['category'] = Category::all();
         $data['product'] = Product::findOrFail($id);
         return view('admin/product/edit', $data);

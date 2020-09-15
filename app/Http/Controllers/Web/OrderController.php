@@ -18,6 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'Orders - Online Shop';
         $data['order'] = Transaction::orderBy('created_at', 'DESC')->whereUserId(Auth::id())->paginate(3);
         return view('web/order', $data);
     }
@@ -28,6 +29,7 @@ class OrderController extends Controller
      */
     public function pay(Request $request)
     {
+        $data['title'] = 'Pay Order - Online Shop';
         $id = $request->query('code');
         $data['payment'] = Transaction::findOrFail($id);
         return view('web/pay', $data);

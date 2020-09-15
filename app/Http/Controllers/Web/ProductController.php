@@ -14,6 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'Online Shop';
         $data['product'] = Product::all();
         return view('web/home', $data);
     }
@@ -25,6 +26,7 @@ class ProductController extends Controller
     public function detail($slug)
     {
         $data['product'] = Product::whereSlug($slug)->first();
+        $data['title'] = $data['product']->product_name .' - Online Shop';
         return view('web/product_detail', $data);
     }
 }

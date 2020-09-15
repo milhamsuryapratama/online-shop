@@ -55,32 +55,32 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-header">Master Data</li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('admin/dashboard') }}" class="nav-link">
-                            <i class="nav-icon fas fa-shopping-cart"></i>
+                        <a href="{{ URL::to('admin/dashboard') }}" class="nav-link {{ $title == 'Dashboard' ? 'active': '' }}">
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('category.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-shopping-cart"></i>
+                        <a href="{{ route('category.index') }}" class="nav-link {{ $title == 'Category' ? 'active': '' }}">
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Categories</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('product.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-building"></i>
+                        <a href="{{ route('product.index') }}" class="nav-link {{ $title == 'Product' ? 'active': '' }}">
+                            <i class="nav-icon far fa-circle"></i>
                             <p>Products</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('admin/transaction') }}" class="nav-link">
-                            <i class="nav-icon fas fa-building"></i>
+                        <a href="{{ URL::to('admin/transaction') }}" class="nav-link {{ $title == 'Transaction' ? 'active': '' }}">
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Transactions</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ URL::to('admin/logout') }}" class="nav-link">
-                            <i class="nav-icon fas fa-building"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Logout</p>
                         </a>
                     </li>

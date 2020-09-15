@@ -19,4 +19,10 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+
+    public function showLinkRequestForm()
+    {
+        $data['title'] = 'Forgot Password';
+        return view('auth/passwords/email', $data);
+    }
 }

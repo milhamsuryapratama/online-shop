@@ -59,6 +59,12 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showRegistrationForm()
+    {
+        $data['title'] = 'Register';
+        return view('auth/register', $data);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *

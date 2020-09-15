@@ -15,6 +15,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'Transaction';
         $data['transaction'] = Transaction::orderBy('id', 'DESC')->get();
         return view('admin/transaction/index', $data);
     }
@@ -25,6 +26,7 @@ class TransactionController extends Controller
      */
     public function detail($id)
     {
+        $data['title'] = 'Transaction';
         $data['detail'] = Transaction::with(['details', 'details.product'])->findOrFail($id);
         return view('admin/transaction/detail', $data);
     }

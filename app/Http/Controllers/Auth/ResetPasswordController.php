@@ -34,7 +34,15 @@ class ResetPasswordController extends Controller
         return [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8|alpha_dash',
+            'password' => 'required|confirmed|min:8|alpha_num',
         ];
+    }
+
+    public function showResetForm(Request $request, $token = null)
+    {
+        $data['title'] = 'Reset Password';
+        $data['email'] = $request->email;
+        $data['token'] = $token;
+        return view('auth/passwords/reset', $data);
     }
 }

@@ -16,6 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'Category';
         $data['category'] = Category::all();
         return view('admin/category/index', $data);
     }
