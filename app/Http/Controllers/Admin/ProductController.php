@@ -50,7 +50,7 @@ class ProductController extends Controller
 
         ProductService::validatePicture($productRequest);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Product has been created');
     }
 
     /**
@@ -91,7 +91,7 @@ class ProductController extends Controller
 
         ProductService::validatePicture($productRequest, $id);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Product has been updated');
     }
 
     /**
@@ -105,7 +105,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         if ($product->delete()) {
             File::delete('assets/photo/' . $product->picture);
-            return redirect()->route('product.index');
+            return redirect()->route('product.index')->with('success', 'Product has been deleted');
         }
     }
 }
