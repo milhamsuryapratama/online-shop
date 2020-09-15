@@ -10,35 +10,35 @@
    * `DB_DATABASE`=online-shop
    * `DB_USERNAME`=root
    * `DB_PASSWORD`=secret
-5. Setup you email configuration
+5. Setup you email configuration in `.env`
     * `MAIL_DRIVER` : smtp
     * `MAIL_HOST` : smtp.mailtrap.io
     * `MAIL_PORT` : 2525
     * `MAIL_USERNAME` : d88353424a9e23
     * `MAIL_PASSWORD` : 73b13322beb99e
-6. Run `php artisan key:generate`
-7. Run `php artisan migrate` to migrate database
-8. Run `composer dump-autoload`
-9. Run `php artisan db:seed` to seed database data
-10. Run `php artisan serve` to start app
-11. Server runing on `http://localhost:8000`
+6. Setup pusher credential in `.env`
+    * `PUSHER_APP_ID` : 1073107
+    * `PUSHER_APP_KEY` : 727557e4dca12f7c6c97
+    * `PUSHER_APP_SECRET` : af28942c15c925941aae
+    * `PUSHER_APP_CLUSTER`  : ap1
+7. Change `BROADCAST_DRIVER` : pusher 
+7. Run `php artisan key:generate`
+8. Run `php artisan migrate` to migrate database
+9. Run `composer dump-autoload`
+10. Run `php artisan db:seed` to seed database data
+11. Run `php artisan serve` to start app
+12. Server runing on `http://localhost:8000`
 
 ## Flowchart
 
+<img src="https://github.com/milhamsuryapratama/online-shop/blob/master/public/assets/flowchart/flowchart.jpg"/>
+
 ## Login Admin
+
+admin page is a place where we can add data such as category data, products and see transactions that have been done by users.
 
 1. Visit `http://localhost:8000/admin`
 2. Login with
     * `email` : admin@gmail.com
     * `password` : admin123
     
-## Setup .env for realtime notification
-
-In the purchase process, after making a transaction (checkout) there is a realtime notification to the admin (dashboard). For that, it is necessary to set up .env to run smoothly. Here's the .env configuration
-
-1. Setup pusher credential
-    * `PUSHER_APP_ID` : 1073107
-    * `PUSHER_APP_KEY` : 727557e4dca12f7c6c97
-    * `PUSHER_APP_SECRET` : af28942c15c925941aae
-    * `PUSHER_APP_CLUSTER`  : ap1
-2. Setup `BROADCAST_DRIVER` : pusher
