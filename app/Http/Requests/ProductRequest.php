@@ -30,14 +30,14 @@ class ProductRequest extends FormRequest
             'price' => ['required'],
             'description' => ['required'],
             'stock' => ['required'],
-            'category' => ['required'],
-            'picture' => ['required']
+            'category' => ['required']
         ];
 
         if (request()->isMethod('PUT')) {
             $rule['product_name'] = ['required', 'min:10' ,'max:255'];
         } else {
             $rule['product_name'] = ['required', 'unique:products', 'min:10' ,'max:255'];
+            $rule['picture'] = ['required', 'mimes:jpeg,jpg,png'];
         }
 
         return $rule;
