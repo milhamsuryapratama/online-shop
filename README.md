@@ -38,7 +38,7 @@
 
 Admin panel adalah bagian yang bisa digunakan untuk menambah data master seperti data kategori, data produk dan melihat data transaksi dari pengguna.
 
-1. Kunjungi `http://localhost:8000/admin`
+1. Kunjungi `http://localhost:8000/admin` dan `http://localhost:8000/admin/dashboard` untuk halaman dashboard
 2. Login dengan
     * `email` : admin@gmail.com
     * `password` : admin123
