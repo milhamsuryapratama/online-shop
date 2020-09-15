@@ -79,24 +79,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $details = [
-
-            'greeting' => 'Hi '.$data['name'],
-
-            'body' => 'Thank you for registered',
-
-            'thanks' => 'Thank you',
-
-            'actionText' => 'Confirm Now',
-
-            'actionUrl' => route('verification.verify', [$user->id, Hash::make($user->id)]),
-
-            'id' => $user->id
-
-        ];
-
-        Notification::send($user, new RegisterConfirmation($details));
-
         return $user;
     }
 }
