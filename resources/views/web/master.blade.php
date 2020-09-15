@@ -59,7 +59,12 @@
                                 @if(Auth::check())
                                     <li><a href="{{ URL::to('cart') }}">Cart</a></li>
                                     <li><a href="{{ URL::to('orders') }}">Order</a></li>
-                                    <li><a href="#">Logout</a></li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit">Logout</button>
+                                        </form>
+                                    </li>
                                 @else
                                     <li><a href="{{ route('register') }}">Register</a></li>
                                     <li><a href="{{ route('login') }}">Login</a></li>
@@ -107,9 +112,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
-                    <li><a href="{{ URL::to('cart') }}">Cart</a></li>
-                    <li><a href="{{ URL::to('orders') }}">Orders</a></li>
+                    <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ URL::to('/') }}">Home</a></li>
+                    <li class="{{ Route::currentRouteName() == 'cart' ? 'active' : '' }}"><a href="{{ URL::to('cart') }}">Cart</a></li>
+                    <li class="{{ Route::currentRouteName() == 'orders' ? 'active' : '' }}"><a href="{{ URL::to('orders') }}">Orders</a></li>
                 </ul>
             </div>
         </div>
@@ -186,8 +191,9 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com"
-                                                                      target="_blank">freshDesignweb.com</a></p>
+                    <p>&copy; 2015 uCommerce. All Rights Reserved.
+                        <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a>
+                    </p>
                 </div>
             </div>
 
