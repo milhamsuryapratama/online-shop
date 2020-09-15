@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label>Total</label>
-                    <input type="text" name="total" id="total" class="form-control" value="{{ $payment->total }}" readonly>
+                    <input type="text" name="total" id="total" class="form-control" value="@currency($payment->total)" readonly>
                 </div>
                 <div class="form-group">
                     <label>Bukti</label>
