@@ -33,7 +33,7 @@ class CartRespository
             ->get(DB::raw('SUM(carts.qty * products.price) as total'));
     }
 
-    public static function deleteCart() {
+    public static function deleteCartByUserId() {
         return Cart::whereUserId(Auth::id())->delete();
     }
 }
