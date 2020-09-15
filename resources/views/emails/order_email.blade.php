@@ -39,13 +39,13 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $c->product->product_name }}</td>
             <td>{{ $c->qty }}</td>
-            <td>{{ $c->product->price }}</td>
-            <td>{{ $c->qty * $c->product->price }}</td>
+            <td>@currency($c->product->price)</td>
+            <td>@currency($c->qty * $c->product->price)</td>
         </tr>
     @endforeach
     <tr>
         <td>Total</td>
-        <td colspan="4">{{ $transaction->total }}</td>
+        <td colspan="4">@currency($transaction->total)</td>
     </tr>
 </table>
 
