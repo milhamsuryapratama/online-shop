@@ -50,7 +50,7 @@
                         <!-- info row -->
                         <div class="row invoice-info">
                             <div class="col-sm-6 invoice-col">
-                                To
+                                Address :
                                 <address>{{ $detail->getAddress() }}</address>
                             </div>
 
@@ -79,8 +79,8 @@
                                             <tr>
                                                 <td>{{ $d->product->product_name }}</td>
                                                 <td>{{ $d->qty }}</td>
-                                                <td>{{ $d->price }}</td>
-                                                <td>{{ $d->sub_total }}</td>
+                                                <td>@currency($d->price)</td>
+                                                <td>@currency($d->sub_total)</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -116,7 +116,7 @@
                                         <tr>
                                             <th>Total :</th>
                                             <td>
-                                                {{ $detail->total }}
+                                                @currency($detail->total)
                                             </td>
                                         </tr>
                                         <tr>

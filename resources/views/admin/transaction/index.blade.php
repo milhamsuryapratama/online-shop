@@ -45,8 +45,8 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>PROVO-{{ $t->id }}</td>
                                             <td>{{ $t->user->name }}</td>
-                                            <td>{{ $t->total }}</td>
-                                            <td>{{ $t->created_at }}</td>
+                                            <td>@currency($t->total)</td>
+                                            <td>{{ \Carbon\Carbon::parse($t->created_at)->format('d M, Y') }}</td>
                                             <td>{{ $t->status }}</td>
                                             <td>
                                                 <a href="{{ URL::to('admin/transaction/data/'.$t->id) }}" class="btn btn-primary">Detail</a>

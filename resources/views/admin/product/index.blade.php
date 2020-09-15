@@ -49,6 +49,7 @@
                                 <th>NO</th>
                                 <th>Name</th>
                                 <th>Price</th>
+                                <th>Stock</th>
                                 <th>Action</th>
                                 </thead>
                                 <tbody>
@@ -56,7 +57,8 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $p->product_name }}</td>
-                                            <td>{{ $p->price }}</td>
+                                            <td>@currency($p->price)</td>
+                                            <td>{{ $p->stock }}</td>
                                             <td>
                                                 <a href="{{ route('product.edit', $p->id) }}" class="btn btn-primary">Edit</a>
                                                 <form action="{{ route('product.destroy', $p->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
