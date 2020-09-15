@@ -134,13 +134,20 @@
         channel.bind('ordernotif', function(data) {
             console.log(data)
             $("#notiforder").html(
-                `there is a new order with the ${data.transaction.id} and the total paid ${data.transaction.total}.
+                `There is a new order with the transaction id PROVO-${data.transaction.id} and the total paid Rp. ${rupiah(data.transaction.total)}.
                  <a href="{{ URL::to('admin/transaction/data/') }}/${data.transaction.id}">See here</a>
                 `
             );
             $("#modal-notifOrder").modal('show');
         });
     });
+
+    function rupiah(angka){
+        var reverse = angka.toString().split('').reverse().join(''),
+            ribuan = reverse.match(/\d{1,3}/g);
+        ribuan = ribuan.join('.').split('').reverse().join('');
+        return ribuan;
+    }
 </script>
 @stack('scripts')
 </body>
