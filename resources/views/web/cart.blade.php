@@ -170,6 +170,12 @@
 
                 changeQty(id, null, row, $(this).val());
             })
+
+            $(".qty").keypress(function (event) {
+                if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                    event.preventDefault();
+                }
+            })
         });
 
         function changeQty(product_id, action, row, val = null) {
