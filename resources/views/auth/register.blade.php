@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="text" name="password" id="password" class="form-control">
+                    <input type="password" name="password" id="password" class="form-control">
                     <small style="color: red">{{ $errors ? $errors->first('password') : '' }}</small>
                     <small id="lblError" style="color: red"></small>
                 </div>
