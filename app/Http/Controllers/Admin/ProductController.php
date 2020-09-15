@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function index()
     {
         $data['title'] = 'Product';
-        $data['product'] = Product::all();
+        $data['product'] = Product::orderBy('id', 'DESC')->get();
         return view('admin/product/index', $data);
     }
 
