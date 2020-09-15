@@ -58,22 +58,22 @@
                         </div>
                     </div>
 
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
-                        <ul>
-                            <li><a href="#">Sony Smart TV - 2015</a></li>
-                            <li><a href="#">Sony Smart TV - 2015</a></li>
-                            <li><a href="#">Sony Smart TV - 2015</a></li>
-                            <li><a href="#">Sony Smart TV - 2015</a></li>
-                            <li><a href="#">Sony Smart TV - 2015</a></li>
-                        </ul>
-                    </div>
                 </div>
 
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
-                            <form method="GET" action="{{ URL::to('checkout') }}">
+                            @if(session('success'))
+                                <div class="woocommerce-info">
+                                    {{ session('success') }}
+                                </div>
+                            @elseif(session('error'))
+                                <div class="woocommerce-info">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            <form method="POST" action="{{ URL::to('checkout') }}">
+                                @csrf
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                     <tr>
@@ -86,48 +86,58 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($cart as $c)
-                                        <tr class="cart_item">
-                                            <td class="product-remove">
-                                                <a title="Remove this item" class="remove" onclick="return confirm('Are you sure?')" href="{{ URL::to('cart/delete/'.$c->id) }}">×</a>
-                                            </td>
+                                    @if(count($cart) > 0)
+                                        @foreach($cart as $c)
+                                            <tr class="cart_item">
+                                                <td class="product-remove">
+                                                    <a title="Remove this item" class="remove" onclick="return confirm('Are you sure?')" href="{{ URL::to('cart/delete/'.$c->id) }}">×</a>
+                                                </td>
 
-                                            <td class="product-thumbnail">
-                                                <a href="{{ URL::to('product/'.$c->product->slug) }}">
-                                                    <img width="145" height="145" alt="{{ $c->product->product_name }}" class="shop_thumbnail" src="{{ asset('assets/photo/'.$c->product->picture) }}">
-                                                </a>
-                                            </td>
+                                                <td class="product-thumbnail">
+                                                    <a href="{{ URL::to('product/'.$c->product->slug) }}">
+                                                        <img width="145" height="145" alt="{{ $c->product->product_name }}" class="shop_thumbnail" src="{{ asset('assets/photo/'.$c->product->picture) }}">
+                                                    </a>
+                                                </td>
 
-                                            <td class="product-name">
-                                                <a href="{{ URL::to('product/'.$c->product->slug) }}">
-                                                    {{ $c->product->product_name }}
-                                                </a>
-                                            </td>
+                                                <td class="product-name">
+                                                    <a href="{{ URL::to('product/'.$c->product->slug) }}">
+                                                        {{ $c->product->product_name }}
+                                                    </a>
+                                                </td>
 
-                                            <td class="product-price">
-                                                <span class="amount">{{ $c->product->price }}</span>
-                                            </td>
+                                                <td class="product-price">
+                                                    <span class="amount">@currency($c->product->price)</span>
+                                                </td>
 
-                                            <td class="product-quantity">
-                                                <div class="quantity buttons_added">
-                                                    <input type="button" class="minus" data-id="{{ $c->product->id }}" value="-">
-                                                    <input type="text" size="2" data-id="{{ $c->product->id }}" class="input-text qty" title="Qty" value="{{ $c->qty }}" min="0" step="1">
-                                                    <input type="button" class="plus" data-id="{{ $c->product->id }}" value="+">
-                                                </div>
-                                            </td>
+                                                <td class="product-quantity">
+                                                    <div class="quantity buttons_added">
+                                                        <input type="button" class="minus" data-id="{{ $c->product->id }}" value="-">
+                                                        <input type="text" size="2" data-id="{{ $c->product->id }}" class="input-text qty" title="Qty" value="{{ $c->qty }}" min="1" step="1">
+                                                        <input type="button" class="plus" data-id="{{ $c->product->id }}" value="+">
+                                                        <br>
+                                                        <small class="out" style="color: red;"></small>
+                                                    </div>
+                                                </td>
 
-                                            <td class="product-subtotal">
+                                                <td class="product-subtotal">
                                                 <span class="subtotal">
-                                                    {{ $c->qty * $c->product->price }}
+                                                    @currency($c->qty * $c->product->price)
                                                 </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td class="actions" colspan="6">
+                                                <input type="submit" value="Checkout" name="proceed" class="checkout-button button alt wc-forward">
                                             </td>
                                         </tr>
-                                    @endforeach
-                                    <tr>
-                                        <td class="actions" colspan="6">
-                                            <input type="submit" value="Checkout" name="proceed" class="checkout-button button alt wc-forward">
-                                        </td>
-                                    </tr>
+                                    @else
+                                        <tr>
+                                            <td class="actions" colspan="6">
+                                                No Data
+                                            </td>
+                                        </tr>
+                                    @endif
                                     </tbody>
                                 </table>
                             </form>
@@ -141,7 +151,7 @@
                                         <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="total">{{ $total[0]->total }}</span></td>
+                                            <td><span class="total">@currency($total[0]->total)</span></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -195,10 +205,13 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response, statusText, xhr) {
-                        if (xhr.status == 200) {
+                        if (response != 'Out of stock !') {
                             row.find('.qty').val(response.data.qty);
-                            $(".total").html(response.data.total[0].total);
-                            row.find('.subtotal').html(response.data.subtotal)
+                            $(".total").html('Rp.' + rupiah(response.data.total[0].total));
+                            row.find('.subtotal').html('Rp.' + rupiah(response.data.subtotal))
+                            row.find('.out').html(response);
+                        } else {
+                            row.find('.out').html(response);
                         }
                     },
                     error: function (error) {
@@ -206,6 +219,13 @@
                     }
                 })
             }
+        }
+
+        function rupiah(angka){
+            var reverse = angka.toString().split('').reverse().join(''),
+                ribuan = reverse.match(/\d{1,3}/g);
+            ribuan = ribuan.join('.').split('').reverse().join('');
+            return ribuan;
         }
     </script>
 @endpush
