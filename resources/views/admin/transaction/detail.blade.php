@@ -120,12 +120,14 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <form method="POST" action="{{ URL::to('admin/transaction/delivered/'.$detail->id) }}">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary float-right" onclick="return confirm('Are you sure ?')">Delivered Order ?</button>
-                                                </form>
-                                            </td>
+                                            @if($detail->status != 'delivered')
+                                                <td>
+                                                    <form method="POST" action="{{ URL::to('admin/transaction/delivered/'.$detail->id) }}">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary float-right" onclick="return confirm('Are you sure ?')">Delivered Order ?</button>
+                                                    </form>
+                                                </td>
+                                            @endif
                                             <td>
                                                 <a data-target="#modal-file" data-toggle="modal" class="btn btn-primary float-right" style="margin-right: 5px;">See Payment Prof</a>
                                             </td>
