@@ -30,7 +30,8 @@ class CheckoutController extends Controller
         $cart = Cart::whereUserId(Auth::id())->get();
 
         $transaction = CheckoutRepository::store($checkoutRequest, $total, $cart);
-        Mail::to('nsyclda@gmail.com')->send(new OrderEmail($transaction, $cart));
-        return redirect()->to('orders')->with('success', 'Congratulations, your order with the code PROVO-'.$transaction->id.' has been successfully placed');
+        Mail::to(Auth::user()->email)->send(new OrderEmail($transaction, $cart));
+        return redirect()->to('orders')->with('success', 'Congratulations, your order with the code PROVO-' . $transaction->id . ' has been successfully placed');
+
     }
 }
