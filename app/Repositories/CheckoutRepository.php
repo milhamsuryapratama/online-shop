@@ -37,7 +37,7 @@ class CheckoutRepository
                         'price' => $c->product->price,
                         'sub_total' => $c->qty * $c->product->price
                     ]);
-                    $produk = Product::find($c->product_id)->first();
+                    $produk = Product::find($c->product_id);
                     $produk->stock -= $c->qty;
                     $produk->save();
                 }
