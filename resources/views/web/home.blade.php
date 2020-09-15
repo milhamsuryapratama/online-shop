@@ -59,9 +59,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    @if (session('status'))
+                    @if (session('verified'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('verified') }}
                         </div>
                     @endif
                     <div class="latest-product">
@@ -90,3 +90,13 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function () {
+           if ('{{ session('verified') }}') {
+               alert('Congrats, email has been verified')
+           }
+        });
+    </script>
+@endpush
