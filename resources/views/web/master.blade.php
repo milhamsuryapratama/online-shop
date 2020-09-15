@@ -7,7 +7,8 @@
     <title>Ustora Demo</title>
 
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet'
+          type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
@@ -50,20 +51,19 @@
                 <div class="header-right">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">
+                                <span class="key">Hi :</span>
+                                <span class="value">{{ Auth::check() ? Auth::user()->name : 'there' }} </span><b
+                                        class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">German</a></li>
+                                @if(Auth::check())
+                                    <li><a href="{{ URL::to('cart') }}">Cart</a></li>
+                                    <li><a href="{{ URL::to('orders') }}">Order</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                @else
+                                    <li><a href="{{ route('register') }}">Register</a></li>
+                                    <li><a href="{{ route('login') }}">Login</a></li>
+                                @endif
                             </ul>
                         </li>
                     </ul>
@@ -84,7 +84,10 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="{{ URL::to('cart') }}">Cart - <span class="cart-amunt">{{ !is_null($cartHead) ? $cartHead[0]->total : 0 }}</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">{{ !is_null($cartHead) ? $cartHead[0]->count : 0 }}</span></a>
+                    <a href="{{ URL::to('cart') }}">Cart - <span
+                                class="cart-amunt">{{ !is_null($cartHead) ? $cartHead[0]->total : 0 }}</span> <i
+                                class="fa fa-shopping-cart"></i> <span
+                                class="product-count">{{ !is_null($cartHead) ? $cartHead[0]->count : 0 }}</span></a>
                 </div>
             </div>
         </div>
@@ -122,7 +125,10 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-about-us">
                     <h2>u<span>Stora</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam
+                        laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure
+                        eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis
+                        magni at?</p>
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -161,7 +167,8 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-newsletter">
                     <h2 class="footer-wid-title">Newsletter</h2>
-                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your
+                        inbox!</p>
                     <div class="newsletter-form">
                         <form action="#">
                             <input type="email" placeholder="Type your email">
@@ -179,7 +186,8 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
+                    <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com"
+                                                                      target="_blank">freshDesignweb.com</a></p>
                 </div>
             </div>
 
