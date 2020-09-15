@@ -15,8 +15,11 @@ class CartService
 {
     public static function cekStock($data)
     {
+        $product = Product::find($data['product_id']);
         $cart = Cart::whereProductId($data['product_id'])->whereUserId(Auth::id())->first();
-        if (is_null($cart)) {
+        if ($product->stock < 2) {
+            throw new Exception('Out of stock, stock minim !');
+        } elseif (is_null($cart)) {
             return Cart::create([
                 'product_id' => $data['product_id'],
                 'qty' => $data['qty'],
@@ -24,8 +27,7 @@ class CartService
             ]);
         }
 
-        $product = Product::find($data['product_id']);
-        if (($data['qty'] + $cart->qty) > $product->stock OR $product->stock < 2) {
+        if (($data['qty'] + $cart->qty) > $product->stock) {
             throw new Exception('Failed to add cart !');
         }
 
@@ -39,30 +41,21 @@ class CartService
 
         if (!is_null($data['action']) && $data['action'] == 'plus') {
             if (($cart->qty + 1) > $cart->product->stock) {
-                return response()->json([
-                    'success' => 0,
-                    'message' => 'Out of stock !'
-                ], 400);
+                throw new Exception('Out of stock !');
             }
 
             $newCart = CartRespository::updateQty($data['product_id'],Auth::id(),'plus');
 
         } else if (!is_null($data['action']) && $data['action'] == 'minus') {
             if (($cart->qty - 1) < 1) {
-                return response()->json([
-                    'success' => 0,
-                    'message' => 'Out of stock !'
-                ], 400);
+                throw new Exception('Out of stock !');
             }
 
             $newCart = CartRespository::updateQty($data['product_id'],Auth::id(),'minus');
 
         } else {
             if ($data['val'] > $cart->product->stock) {
-                return response()->json([
-                    'success' => 0,
-                    'message' => 'Out of stock !'
-                ], 400);
+                throw new Exception('Out of stock !');
             }
 
             $newCart = CartRespository::updateQty($data['product_id'],Auth::id(),'', $data['val']);
