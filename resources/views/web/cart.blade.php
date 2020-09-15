@@ -189,9 +189,11 @@
                         if (response != 'Out of stock !') {
                             row.find('.qty').val(response.data.qty);
                             $(".total").html('Rp.' + rupiah(response.data.total[0].total));
-                            row.find('.subtotal').html('Rp.' + rupiah(response.data.subtotal))
+                            row.find('.subtotal').html('Rp.' + rupiah(response.data.subtotal));
                             row.find('.out').html(response);
+                            $("#checkout").prop('disabled',false);
                         } else {
+                            $("#checkout").prop('disabled',true);
                             row.find('.out').html(response);
                         }
                     },
