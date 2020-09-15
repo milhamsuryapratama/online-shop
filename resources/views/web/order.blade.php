@@ -52,7 +52,7 @@
                                         </td>
 
                                         <td class="product-quantity">
-                                            {{ $o->created_at }}
+                                            {{ \Carbon\Carbon::parse($o->created_at)->format('d M, Y') }}
                                         </td>
 
                                         <td class="product-subtotal">

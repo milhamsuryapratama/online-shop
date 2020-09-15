@@ -5,43 +5,18 @@
         <!-- Slider -->
         <div class="block-slider block-slider4">
             <ul class="" id="bxslider-home4">
-                <li>
-                    <img src="{{ asset('assets/web/img/h4-slide.png') }}" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            iPhone <span class="primary">6 <strong>Plus</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">Dual SIM</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
-                </li>
-                <li><img src="{{ asset('assets/web/img/h4-slide2.png') }}" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            by one, get one <span class="primary">50% <strong>off</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">school supplies & backpacks.*</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
-                </li>
-                <li><img src="{{ asset('assets/web/img/h4-slide3.png') }}" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            Apple <span class="primary">Store <strong>Ipod</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">Select Item</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
-                </li>
-                <li><img src="{{ asset('assets/web/img/h4-slide4.png') }}" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            Apple <span class="primary">Store <strong>Ipod</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">& Phone</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
-                </li>
+                @for($i = 0; $i < 2; $i++)
+                    <li>
+                        <img src="{{ asset('assets/photo/'.$product[$i]->picture) }}" alt="{{ $product[$i]->product_name }}" style="width: 195px">
+                        <div class="caption-group">
+                            <h2 class="caption title">
+                                {{ $product[$i]->product_name }}
+                            </h2>
+{{--                            <h4 class="caption subtitle">Dual SIM</h4>--}}
+                            <a class="caption button-radius" href="{{ URL::to('product/'.$product[$i]->slug) }}"><span class="icon"></span>Shop now</a>
+                        </div>
+                    </li>
+                @endfor
             </ul>
         </div>
         <!-- ./Slider -->
@@ -92,15 +67,14 @@
                                     <div class="product-f-image">
                                         <img src="{{ asset('assets/photo/'.$p->picture) }}" alt="">
                                         <div class="product-hover">
-                                            <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="{{ URL::to('product/'.$p->slug) }}" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                         </div>
                                     </div>
 
-                                    <h2><a href="single-product.html">{{ $p->product_name }}</a></h2>
+                                    <h2><a href="{{ URL::to('product/'.$p->slug) }}">{{ $p->product_name }}</a></h2>
 
                                     <div class="product-carousel-price">
-                                        <ins>Rp. {{ $p->price }}</ins>
+                                        <ins>@currency($p->price)</ins>
                                     </div>
                                 </div>
                             @endforeach

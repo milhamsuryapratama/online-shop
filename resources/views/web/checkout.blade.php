@@ -48,7 +48,7 @@
                                             </td>
 
                                             <td class="product-price">
-                                                <span class="amount">{{ $c->product->price }}</span>
+                                                <span class="amount">@currency($c->product->price)</span>
                                             </td>
 
                                             <td class="product-quantity">
@@ -57,7 +57,7 @@
 
                                             <td class="product-subtotal">
                                                 <span class="subtotal">
-                                                    {{ $c->qty * $c->product->price }}
+                                                    @currency($c->qty * $c->product->price)
                                                 </span>
                                             </td>
                                         </tr>
@@ -75,7 +75,7 @@
                                         <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="total">{{ $total[0]->total }}</span></td>
+                                            <td><span class="total">@currency($total[0]->total)</span></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -94,7 +94,7 @@
                                     <label class="checkbox" for="ship-to-different-address-checkbox">Ship to a address?</label>
                                 </h3>
 
-                                <form method="POST" action="#">
+                                <form method="POST" action="{{ URL::to('checkout/store') }}">
                                     @csrf
                                     <div class="shipping_address" style="display: block;">
 
