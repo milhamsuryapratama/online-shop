@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    /**
+     * Display cart page
+     *
+     */
     public function index()
     {
         $data['cart'] = Cart::whereUserId(Auth::id())->get();
@@ -26,6 +30,10 @@ class CartController extends Controller
         return view('web/cart', $data);
     }
 
+    /**
+     * Handle store data cart
+     *
+     */
     public function store(Request $request)
     {
         try {
@@ -37,6 +45,10 @@ class CartController extends Controller
         return redirect()->to('cart');
     }
 
+    /**
+     * Handle delete data cart
+     *
+     */
     public function delete($id)
     {
         $cart = Cart::findOrFail($id);

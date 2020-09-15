@@ -9,18 +9,30 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+    /**
+     * Display transaction page
+     *
+     */
     public function index()
     {
-        $data['transaction'] = Transaction::all();
+        $data['transaction'] = Transaction::orderBy('id', 'DESC')->get();
         return view('admin/transaction/index', $data);
     }
 
+    /**
+     * Display transaction detail page
+     *
+     */
     public function detail($id)
     {
         $data['detail'] = Transaction::with(['details', 'details.product'])->findOrFail($id);
         return view('admin/transaction/detail', $data);
     }
 
+    /**
+     * Handle change order status action
+     *
+     */
     public function delivered($id)
     {
         try {

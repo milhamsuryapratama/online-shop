@@ -12,6 +12,10 @@ use File;
 
 class ProductService
 {
+    /**
+     * Handle validate product picture when store and update product
+     *
+     */
     public static function validatePicture($data, $id = null)
     {
         $product = Product::find($id);

@@ -8,12 +8,20 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    /**
+     * Display homepage view
+     *
+     */
     public function index()
     {
         $data['product'] = Product::all();
         return view('web/home', $data);
     }
 
+    /**
+     * Display product detail page
+     *
+     */
     public function detail($slug)
     {
         $data['product'] = Product::whereSlug($slug)->first();

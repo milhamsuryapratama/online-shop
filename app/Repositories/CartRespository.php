@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class CartRespository
 {
-
+    /**
+     * Handle update qty in cart
+     *
+     */
     public static function updateQty($product_id, $user_id, $action, $val = null)
     {
         $cart = Cart::whereProductId($product_id)->whereUserId($user_id)->first();
@@ -26,6 +29,10 @@ class CartRespository
         return $cart;
     }
 
+    /**
+     * Get data total in cart
+     *
+     */
     public static function getTotal()
     {
         return Cart::join('products', 'products.id', '=', 'carts.product_id')
@@ -33,6 +40,10 @@ class CartRespository
             ->get(DB::raw('SUM(carts.qty * products.price) as total'));
     }
 
+    /**
+     * Handle delete cart by user id
+     *
+     */
     public static function deleteCartByUserId() {
         return Cart::whereUserId(Auth::id())->delete();
     }

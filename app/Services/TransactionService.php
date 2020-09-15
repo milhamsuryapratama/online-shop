@@ -8,6 +8,10 @@ use App\Models\Transaction;
 
 class TransactionService
 {
+    /**
+     * Handle validate payment process at transaction
+     *
+     */
     public static function validatePayment($id)
     {
         $transaction = Transaction::findOrFail($id);

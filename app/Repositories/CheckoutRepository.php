@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class CheckoutRepository
 {
+    /**
+     * Handle store transaction and transaction_detail data
+     *
+     */
     public static function store($data, $total, $cart)
     {
         DB::beginTransaction();

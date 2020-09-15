@@ -16,11 +16,19 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
+    /**
+     * Display login view.
+     *
+     */
     public function index()
     {
         return view('admin/login');
     }
 
+    /**
+     * Handle a admin login request to cms
+     *
+     */
     public function login(Request $request)
     {
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -30,6 +38,10 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Handle logout admin
+     *
+     */
     public function logout()
     {
         Auth::guard('admin')->logout();

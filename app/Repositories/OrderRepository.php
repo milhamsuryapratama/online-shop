@@ -9,6 +9,9 @@ use File;
 
 class OrderRepository
 {
+    /**
+     * Handle validate file upload
+     */
     public static function saveFile($data)
     {
         if ($data->hasFile('file')) {

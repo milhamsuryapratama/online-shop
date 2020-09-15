@@ -13,11 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class CartService
 {
+    /**
+     * Handle validate product stock when we adding cart
+     *
+     */
     public static function cekStock($data)
     {
         $product = Product::find($data['product_id']);
         $cart = Cart::whereProductId($data['product_id'])->whereUserId(Auth::id())->first();
-        if ($product->stock < 2) {
+        if ($product->stock < 2 OR $data['qty'] > $product->stock) {
             throw new Exception('Out of stock, stock minim !');
         } elseif (is_null($cart)) {
             return Cart::create([
@@ -35,6 +39,10 @@ class CartService
         return $cart->update();
     }
 
+    /**
+     * Handle validation change qty at cart
+     *
+     */
     public static function changeQty($data)
     {
         $cart = Cart::whereProductId($data['product_id'])->whereUserId(Auth::id())->first();

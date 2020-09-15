@@ -12,12 +12,20 @@ use File;
 
 class OrderController extends Controller
 {
+    /**
+     * Display orders page
+     *
+     */
     public function index()
     {
         $data['order'] = Transaction::orderBy('created_at', 'DESC')->whereUserId(Auth::id())->paginate(3);
         return view('web/order', $data);
     }
 
+    /**
+     * Display payment form page
+     *
+     */
     public function pay(Request $request)
     {
         $id = $request->query('code');
@@ -25,6 +33,10 @@ class OrderController extends Controller
         return view('web/pay', $data);
     }
 
+    /**
+     * Handle change payment status
+     *
+     */
     public function paid(PaidRequest $paidRequest)
     {
         $paidRequest->validated();

@@ -9,6 +9,10 @@ use Illuminate\Support\Str;
 
 class ProductRepository
 {
+    /**
+     * Handle store data product
+     *
+     */
     public static function store($data, $name)
     {
         return Product::create([
@@ -22,6 +26,10 @@ class ProductRepository
         ]);
     }
 
+    /**
+     * Handle update data product
+     *
+     */
     public static function update($data, $id, $name)
     {
         return Product::find($id)->update([
