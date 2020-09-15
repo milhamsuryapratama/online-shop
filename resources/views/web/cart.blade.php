@@ -108,7 +108,8 @@
                                         @endforeach
                                         <tr>
                                             <td class="actions" colspan="6">
-                                                <input type="submit" value="Checkout" name="proceed" class="checkout-button button alt wc-forward">
+{{--                                                <input type="submit" value="Checkout" name="proceed" id="checkout" class="checkout-button button alt wc-forward">--}}
+                                                <button type="submit" name="proceed" id="checkout" class="checkout-button button alt wc-forward">Checkout</button>
                                             </td>
                                         </tr>
                                     @else
