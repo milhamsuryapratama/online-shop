@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Repositories\CartRespository;
 use App\Services\CartService;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class CartController extends Controller
     {
         $data['title'] = 'Cart - Online Shop';
         $data['cart'] = Cart::whereUserId(Auth::id())->get();
+        $data['other_product'] = Product::orderBy('id','DESC')->take(4)->get();
 //        $cart = Cart::join('products', 'products.id', '=', 'carts.product_id')
 //            ->where('carts.user_id', Auth::id())
 //            ->get([
@@ -60,6 +62,10 @@ class CartController extends Controller
         return redirect()->back()->with(['error' => 'Failed to delete cart']);
     }
 
+    /**
+     * Handle change qty in cart from ajax request only
+     *
+     */
     public function change_qty(Request $request)
     {
         try {
