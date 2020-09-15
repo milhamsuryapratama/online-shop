@@ -37,29 +37,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order as $o)
-                                    <tr class="cart_item">
-                                        <td>
-                                            {{ $loop->iteration }}
-                                        </td>
+                                @if(count($order) > 0)
+                                    @foreach($order as $o)
+                                        <tr class="cart_item">
+                                            <td>
+                                                {{ $loop->iteration }}
+                                            </td>
 
-                                        <td class="product-name">
-                                            PROVO-{{ $o->id }}
-                                        </td>
+                                            <td class="product-name">
+                                                PROVO-{{ $o->id }}
+                                            </td>
 
-                                        <td class="product-price">
-                                            <span class="amount">{{ $o->total }}</span>
-                                        </td>
+                                            <td class="product-price">
+                                                <span class="amount">{{ $o->total }}</span>
+                                            </td>
 
-                                        <td class="product-quantity">
-                                            {{ \Carbon\Carbon::parse($o->created_at)->format('d M, Y') }}
-                                        </td>
+                                            <td class="product-quantity">
+                                                {{ \Carbon\Carbon::parse($o->created_at)->format('d M, Y') }}
+                                            </td>
 
-                                        <td class="product-subtotal">
-                                            <span class="amount">{{ $o->status }}</span>
-                                        </td>
+                                            <td class="product-subtotal">
+                                                <span class="amount">{{ $o->status }}</span>
+                                            </td>
 
-                                        <td class="product-subtotal">
+                                            <td class="product-subtotal">
                                             <span class="amount">
                                                 @if($o->payment_process == 'Y')
                                                     Paid
@@ -67,14 +68,21 @@
                                                     <a href="{{ URL::to('orders/pay?code='.$o->id) }}">Pay Now</a>
                                                 @endif
                                             </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td class="actions" colspan="6">
+                                            {{ $order->links() }}
                                         </td>
                                     </tr>
-                                @endforeach
-                                <tr>
-                                    <td class="actions" colspan="6">
-                                        {{ $order->links() }}
-                                    </td>
-                                </tr>
+                                @else
+                                    <tr>
+                                        <td class="actions" colspan="6">
+                                            Data Not Found
+                                        </td>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
