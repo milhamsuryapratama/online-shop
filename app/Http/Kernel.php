@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\DisableRedirectUrl;
+use App\Http\Middleware\AuthCheckMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'disableRedirectUrl' => DisableRedirectUrl::class
+        'authCheck' => AuthCheckMiddleware::class
     ];
 
     /**
