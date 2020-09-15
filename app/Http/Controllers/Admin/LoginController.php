@@ -13,7 +13,7 @@ class LoginController extends Controller
     public function __construct()
     {
 //        $this->middleware('guest')->except('logout');
-        $this->middleware('guest:admin')->except('logout');
+//        $this->middleware('guest:admin')->except('logout');
     }
 
     /**
@@ -22,6 +22,9 @@ class LoginController extends Controller
      */
     public function index()
     {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->to('admin/dashboard');
+        }
         return view('admin/login');
     }
 
@@ -34,7 +37,7 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->to('admin/dashboard');
         } else {
-            return redirect()->back();
+            return redirect()->back()->with(['error' => 'Login error, check your username anda password again']);
         }
     }
 
