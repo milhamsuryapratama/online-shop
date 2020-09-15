@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use ImageResize;
@@ -45,23 +46,7 @@ class ProductController extends Controller
     {
         $productRequest->validated();
 
-        $picture = $productRequest->file('picture');
-
-        $name = uniqid() . '_' . trim($picture->getClientOriginalName());
-
-        $img = ImageResize::make($picture->path());
-
-        $img->resize(195, 243)->save('assets/photo/'.$name);
-
-        Product::create([
-           'product_name' => $productRequest->product_name,
-           'price' => $productRequest->price,
-           'stock' => $productRequest->stock,
-           'category_id' => $productRequest->category,
-           'description' => $productRequest->description,
-           'slug' => Str::slug($productRequest->product_name),
-           'picture' => $name
-        ]);
+        ProductService::validatePicture($productRequest);
 
         return redirect()->route('product.index');
     }
@@ -101,29 +86,7 @@ class ProductController extends Controller
     {
         $productRequest->validated();
 
-        $picture = $productRequest->file('picture');
-
-        $name = uniqid() . '_' . trim($picture->getClientOriginalName());
-
-        $img = ImageResize::make($picture->path());
-
-        $img->resize(195, 243)->save('assets/photo/'.$name);
-
-        $product = Product::find($id);
-
-        if ($productRequest->hasFile('picture')) {
-            File::delete('assets/photo/' . $product->picture);
-        }
-
-        $product->update([
-            'product_name' => $productRequest->product_name,
-            'price' => $productRequest->price,
-            'stock' => $productRequest->stock,
-            'category_id' => $productRequest->category,
-            'description' => $productRequest->description,
-            'slug' => Str::slug($productRequest->product_name),
-            'picture' => $name
-        ]);
+        ProductService::validatePicture($productRequest, $id);
 
         return redirect()->route('product.index');
     }
