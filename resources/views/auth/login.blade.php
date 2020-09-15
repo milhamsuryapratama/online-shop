@@ -38,7 +38,8 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Login</button>
-                    <a href="{{ route('register') }}">Register ?</a>
+                    <a href="{{ route('register') }}">Register ?</a> |
+                    <a href="{{ route('password.request') }}">Forgot Password ?</a>
                 </div>
             </form>
         </div>

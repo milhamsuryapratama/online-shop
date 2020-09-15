@@ -35,22 +35,45 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <input id="password" type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert" style="color: red">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                    <small id="lblError" style="color: red"></small>
                 </div>
                 <div class="form-group">
                     <label>Password Confirmation</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">reset</button>
+                    <button type="submit" class="btn btn-primary" id="reset">reset</button>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function () {
+            $("#password").keyup(function (e) {
+                let password = $(this).val();
+                var letters = /^[a-zA-Z0-9]+$/;
+
+                var result = letters.test(password);
+
+                if (result) {
+                    $("#lblError").html("");
+                    $("#reset").prop('disabled', false);
+                    return;
+                } else {
+                    $("#reset").prop('disabled', true);
+                    $("#lblError").html("Password must be alphanumeric");
+                }
+            });
+        });
+    </script>
+@endpush

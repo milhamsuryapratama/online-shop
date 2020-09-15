@@ -30,18 +30,41 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" id="password" class="form-control">
+                    <input type="text" name="password" id="password" class="form-control">
                     <small style="color: red">{{ $errors ? $errors->first('password') : '' }}</small>
+                    <small id="lblError" style="color: red"></small>
                 </div>
                 <div class="form-group">
                     <label>Password Confirmation</label>
                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary" id="register">Register</button>
                     <a href="{{ route('login') }}">Login ?</a>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function () {
+            $("#password").keyup(function (e) {
+                let password = $(this).val();
+                var letters = /^[a-zA-Z0-9]+$/;
+
+                var result = letters.test(password);
+
+                if (result) {
+                    $("#lblError").html("");
+                    $("#register").prop('disabled', false);
+                    return;
+                } else {
+                    $("#register").prop('disabled', true);
+                    $("#lblError").html("Password must be alphanumeric");
+                }
+            });
+        });
+    </script>
+@endpush
