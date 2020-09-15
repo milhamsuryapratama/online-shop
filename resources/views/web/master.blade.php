@@ -115,6 +115,10 @@
                     <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ URL::to('/') }}">Home</a></li>
                     <li class="{{ Route::currentRouteName() == 'cart' ? 'active' : '' }}"><a href="{{ URL::to('cart') }}">Cart</a></li>
                     <li class="{{ Route::currentRouteName() == 'orders' ? 'active' : '' }}"><a href="{{ URL::to('orders') }}">Orders</a></li>
+                    @if(!Auth::check())
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
