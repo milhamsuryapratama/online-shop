@@ -55,6 +55,12 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-header">Master Data</li>
                     <li class="nav-item">
+                        <a href="{{ URL::to('admin/dashboard') }}" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-cart"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('category.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-shopping-cart"></i>
                             <p>Categories</p>
@@ -93,12 +99,49 @@
     </footer>
 </div>
 
+<div class="modal fade" id="modal-notifOrder" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Notification Order</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="notiforder">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{ asset('assets/admin/js/plugins/jquery/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/js/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/js/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/js/adminlte.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/js/plugins/dataTables/datatables.min.js') }}"></script>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+    $(function () {
+        // Pusher.logToConsole = true;
+
+        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('ordernotif');
+        channel.bind('ordernotif', function(data) {
+            console.log(data)
+            $("#notiforder").html(
+                `there is a new order with the ${data.transaction.id} and the total paid ${data.transaction.total}.
+                 <a href="{{ URL::to('admin/transaction/data/') }}/${data.transaction.id}">See here</a>
+                `
+            );
+            $("#modal-notifOrder").modal('show');
+        });
+    });
+</script>
 @stack('scripts')
 </body>
 </html>
