@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\Transaction_Details;
 use Illuminate\Support\Facades\Auth;
@@ -32,8 +33,11 @@ class CheckoutRepository
                         'price' => $c->product->price,
                         'sub_total' => $c->qty * $c->product->price
                     ]);
+                    $produk = Product::find($c->product_id)->first();
+                    $produk->stock -= $c->qty;
+                    $produk->save();
                 }
-                CartRespository::deleteCart();
+                CartRespository::deleteCartByUserId();
                 DB::commit();
                 return $transaction;
             }
