@@ -21,13 +21,24 @@
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" name="email" id="email" class="form-control">
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" style="color:red;">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" name="password" id="password" class="form-control">
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback" style="color:red;">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="{{ route('register') }}">Register ?</a>
                 </div>
             </form>
         </div>
