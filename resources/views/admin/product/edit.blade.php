@@ -73,8 +73,11 @@
                                     </small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="picture">Change Picture (if needed)</label>
-                                    <input type="file" id="picture" name="picture" class="form-control" required>
+                                    <label for="picture">
+                                        Change Picture (if needed) | <a data-target="#modal-picture" data-toggle="modal" href="#">Current Picture</a>
+                                    </label>
+                                    <input type="file" id="picture" name="picture" class="form-control">
+
                                     <small style="color: red">
                                         {{ $errors ? $errors->first('picture') : '' }}
                                     </small>
@@ -89,6 +92,26 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="modal-picture">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Current Picture</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @if(is_null($product->picture))
+                        <p style="text-align: center">Nothing file</p>
+                    @else
+                        <img src="{{ asset('assets/photo/'.$product->picture) }}">
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
