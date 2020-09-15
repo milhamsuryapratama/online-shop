@@ -14,12 +14,13 @@
 use App\Events\OrderNotif;
 
 Route::get('/home', 'HomeController@index');
+Route::get('/admin', 'Admin\LoginController@index')->middleware('authCheck');
 Route::get('admin/logout', 'Admin\LoginController@logout');
+Route::get('/admin/login', 'Admin\LoginController@index');
+Route::post('/admin/login', 'Admin\LoginController@login');
 
 Route::group(['namespace' => 'Admin'], function () {
-    Route::group(['prefix' => 'admin'], function () {
-        Route::get('/', 'LoginController@index');
-        Route::post('/login', 'LoginController@login');
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         Route::get('/dashboard', 'DashboardController@index');
 
         Route::resource('category', 'CategoryController');
@@ -46,7 +47,7 @@ Route::group(['namespace' => 'Web'], function () {
       Route::post('/change_qty', 'CartController@change_qty');
    });
 
-   Route::group(['prefix' => 'checkout', 'middleware' => ['auth', 'disableRedirectUrl']], function () {
+   Route::group(['prefix' => 'checkout', 'middleware' => 'auth'], function () {
       Route::post('/', 'CheckoutController@index')->name('checkout');
       Route::post('/store', 'CheckoutController@store');
    });
