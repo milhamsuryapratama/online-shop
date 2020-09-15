@@ -53,14 +53,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Price</label>
-                                    <input type="number" id="price" name="price" class="form-control" value="{{ $product->price }}" required>
+                                    <input type="text" id="price" name="price" class="form-control" value="{{ $product->price }}" required>
                                     <small style="color: red">
                                         {{ $errors ? $errors->first('price') : '' }}
                                     </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="stock">Stock</label>
-                                    <input type="number" id="stock" name="stock" class="form-control" value="{{ $product->stock }}" required>
+                                    <input type="text" id="stock" name="stock" class="form-control" value="{{ $product->stock }}" required>
                                     <small style="color: red">
                                         {{ $errors ? $errors->first('stock') : '' }}
                                     </small>
@@ -83,7 +83,8 @@
                                     </small>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="button" class="btn btn-danger" onclick="return self.history.back()">Cancle</button>
                                 </div>
                             </form>
                         </div>
@@ -120,6 +121,18 @@
             tinymce.init({
                 selector: '#description'
             });
+
+            $("#stock").keypress(function (event) {
+                if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                    event.preventDefault();
+                }
+            })
+
+            $("#price").keypress(function (event) {
+                if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                    event.preventDefault();
+                }
+            })
         });
     </script>
 @endpush

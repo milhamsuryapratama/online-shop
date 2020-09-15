@@ -48,14 +48,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Price</label>
-                                    <input type="number" id="price" name="price" class="form-control" value="{{ old('price') }}" required>
+                                    <input type="text" id="price" name="price" class="form-control" value="{{ old('price') }}" min="1" step="1" required>
                                     <small style="color: red">
                                         {{ $errors ? $errors->first('price') : '' }}
                                     </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="stock">Stock</label>
-                                    <input type="number" id="stock" name="stock" class="form-control" value="{{ old('stock') }}" required>
+                                    <input type="text" id="stock" name="stock" class="form-control" value="{{ old('stock') }}" min="1" step="1" required>
                                     <small style="color: red">
                                         {{ $errors ? $errors->first('stock') : '' }}
                                     </small>
@@ -76,6 +76,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-danger" onclick="return self.history.back()">Cancle</button>
                                 </div>
                             </form>
                         </div>
@@ -92,6 +93,18 @@
             tinymce.init({
                 selector: '#description'
             });
+
+            $("#stock").keypress(function (event) {
+                if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                    event.preventDefault();
+                }
+            })
+
+            $("#price").keypress(function (event) {
+                if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                    event.preventDefault();
+                }
+            })
         });
     </script>
 @endpush
