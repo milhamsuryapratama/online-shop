@@ -11,14 +11,16 @@
 |
 */
 
+use App\Events\OrderNotif;
+
 Route::get('/home', 'HomeController@index');
 Route::get('admin/logout', 'Admin\LoginController@logout');
-Route::get('admin/dashboard', 'Admin\DashboardController@index');
 
 Route::group(['namespace' => 'Admin'], function () {
     Route::group(['prefix' => 'admin'], function () {
         Route::get('/', 'LoginController@index');
         Route::post('/login', 'LoginController@login');
+        Route::get('/dashboard', 'DashboardController@index');
 
         Route::resource('category', 'CategoryController');
         Route::resource('product', 'ProductController');
@@ -38,7 +40,7 @@ Route::group(['namespace' => 'Web'], function () {
    });
 
    Route::group(['prefix' => 'cart', 'middleware' => 'auth'], function () {
-      Route::get('/', 'CartController@index');
+      Route::get('/', 'CartController@index')->name('cart');
       Route::post('/', 'CartController@store');
       Route::get('/delete/{id}', 'CartController@delete');
       Route::post('/change_qty', 'CartController@change_qty');
@@ -50,11 +52,11 @@ Route::group(['namespace' => 'Web'], function () {
    });
 
     Route::group(['prefix' => 'orders', 'middleware' => 'auth'], function () {
-        Route::get('/', 'OrderController@index');
+        Route::get('/', 'OrderController@index')->name('orders');
         Route::get('/pay', 'OrderController@pay');
         Route::post('/paid', 'OrderController@paid');
     });
 });
 
 Auth::routes(['verify' => true]);
-Route::get('/', 'Web\ProductController@index');
+Route::get('/', 'Web\ProductController@index')->name('home');
