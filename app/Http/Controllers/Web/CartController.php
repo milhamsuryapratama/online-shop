@@ -41,8 +41,10 @@ class CartController extends Controller
     {
         $cart = Cart::findOrFail($id);
         if ($cart->delete()) {
-            return redirect()->back();
+            return redirect()->back()->with(['success' => 'Delete cart successfully']);
         }
+
+        return redirect()->back()->with(['error' => 'Failed to delete cart']);
     }
 
     public function change_qty(Request $request)
@@ -52,7 +54,7 @@ class CartController extends Controller
                 return CartService::changeQty($request->all());
             }
         } catch (\Exception $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
