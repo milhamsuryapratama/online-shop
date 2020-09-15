@@ -22,6 +22,7 @@
     * `PUSHER_APP_SECRET` : af28942c15c925941aae
     * `PUSHER_APP_CLUSTER`  : ap1
 7. Change `BROADCAST_DRIVER` : pusher 
+8. Remove `MAIL_FROM_ADDRESS=null` in `.env`
 7. Run `php artisan key:generate`
 8. Run `php artisan migrate` to migrate database
 9. Run `composer dump-autoload`
