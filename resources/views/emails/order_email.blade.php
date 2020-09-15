@@ -44,8 +44,8 @@
         </tr>
     @endforeach
     <tr>
-        <td>Total</td>
-        <td colspan="4">@currency($transaction->total)</td>
+        <td colspan="4">Total</td>
+        <td>@currency($transaction->total)</td>
     </tr>
 </table>
 
