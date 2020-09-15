@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" id="email" class="form-control" value="{{ old('name') }}">
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}">
                     <small style="color: red">{{ $errors ? $errors->first('email') : '' }}</small>
                 </div>
                 <div class="form-group">
