@@ -5,18 +5,31 @@
         <!-- Slider -->
         <div class="block-slider block-slider4">
             <ul class="" id="bxslider-home4">
-                @for($i = 0; $i < 2; $i++)
+                @if(count($product) > 0)
+                    @for($i = 0; $i < 2; $i++)
+                        <li>
+                            <img src="{{ asset('assets/photo/'.$product[$i]->picture) }}" alt="{{ $product[$i]->product_name }}" style="width: 195px">
+                            <div class="caption-group">
+                                <h2 class="caption title">
+                                    {{ $product[$i]->product_name }}
+                                </h2>
+                                {{--                            <h4 class="caption subtitle">Dual SIM</h4>--}}
+                                <a class="caption button-radius" href="{{ URL::to('product/'.$product[$i]->slug) }}"><span class="icon"></span>Shop now</a>
+                            </div>
+                        </li>
+                    @endfor
+                @else
                     <li>
-                        <img src="{{ asset('assets/photo/'.$product[$i]->picture) }}" alt="{{ $product[$i]->product_name }}" style="width: 195px">
+                        <img src="{{ asset('assets/web/img/product-5.jpg') }}" alt="Iphone" style="width: 195px">
                         <div class="caption-group">
                             <h2 class="caption title">
-                                {{ $product[$i]->product_name }}
+                                Iphone X
                             </h2>
-{{--                            <h4 class="caption subtitle">Dual SIM</h4>--}}
-                            <a class="caption button-radius" href="{{ URL::to('product/'.$product[$i]->slug) }}"><span class="icon"></span>Shop now</a>
+                            {{--                            <h4 class="caption subtitle">Dual SIM</h4>--}}
+                            <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
                         </div>
                     </li>
-                @endfor
+                @endif
             </ul>
         </div>
         <!-- ./Slider -->
