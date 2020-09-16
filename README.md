@@ -16,7 +16,7 @@
     * `MAIL_PORT` : 2525
     * `MAIL_USERNAME` : d88353424a9e23
     * `MAIL_PASSWORD` : 73b13322beb99e
-6. Pengaturan pusher di `.env`, ini digunakan untuk membuat notifikas realtime kepada amin ketika terdapat user yang melakukan transaksi. Begitu transaksi berhasil dilakukan, disaat yang sama terdapat notifikasi pada halaman admin dengan munculnya `modal` yang memberikan informasi bahwa terdapat transaksi baru. Berikut pengaturan pusher :
+6. Pengaturan pusher di `.env`, ini digunakan untuk membuat notifikasi realtime kepada admin ketika terdapat user yang melakukan transaksi. Begitu transaksi berhasil dilakukan, disaat yang sama terdapat notifikasi pada halaman admin dengan munculnya `modal` yang memberikan informasi bahwa terdapat transaksi baru. Berikut pengaturan pusher :
     * `PUSHER_APP_ID` : 1073107
     * `PUSHER_APP_KEY` : 727557e4dca12f7c6c97
     * `PUSHER_APP_SECRET` : af28942c15c925941aae
