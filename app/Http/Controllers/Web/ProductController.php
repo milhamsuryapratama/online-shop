@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,9 @@ class ProductController extends Controller
     {
         $data['title'] = 'Online Shop';
         $data['product'] = Product::orderBy('id', 'DESC')->get();
+        $data['category'] = Category::with(['product' => function ($query) {
+            $query->take(3);
+        }])->take(3)->get();
         return view('web/home', $data);
     }
 
