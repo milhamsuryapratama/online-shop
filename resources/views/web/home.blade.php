@@ -89,6 +89,38 @@
             </div>
         </div>
     </div>
+
+    <div class="product-widget-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                @foreach($category as $c)
+                    <div class="col-md-4">
+                        <div class="single-product-widget">
+                            <h2 class="product-wid-title">{{ $c->category_name }}</h2>
+                            <a href="" class="wid-view-more">View All</a>
+                            @foreach($c->product as $p)
+                                <div class="single-wid-product">
+                                    <a href="{{ URL::to('product/'.$p->slug) }}"><img src="{{ asset('assets/photo/'.$p->picture) }}" alt="" class="product-thumb"></a>
+                                    <h2><a href="{{ URL::to('product/'.$p->slug) }}">{{ $p->product_name }}</a></h2>
+                                    <div class="product-wid-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-wid-price">
+                                        <ins>@currency($p->price)</ins>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
